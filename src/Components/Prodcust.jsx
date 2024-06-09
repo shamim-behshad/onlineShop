@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SearchBar from "./SearchBar";
+import CategoryDropdown from "./CategoryDropdown";
 
 const Products = ({ addToCart }) => {
   const [loading, setLoading] = useState(false);
