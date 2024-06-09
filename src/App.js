@@ -1,9 +1,10 @@
 import React from 'react';
-import './index.css'; // Make sure to import your main CSS file
+import './App.css';
+import Navbar from './Components/Navbar'
 
 function App() {
   return (
-    
+    <Navbar />
   );
 }
 
