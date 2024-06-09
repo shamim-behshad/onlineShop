@@ -1,11 +1,15 @@
 // Components/Products.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
+import ProductCard from "./ProductCard";
 import SearchBar from "./SearchBar";
 import CategoryDropdown from "./CategoryDropdown";
 
 const Products = ({ addToCart }) => {
   const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -21,11 +25,23 @@ const Products = ({ addToCart }) => {
       .finally(() => setLoading(false));
   }, []);
 
-  
+  const filteredData = useMemo(() => {
+    return data.filter(
+      (product) =>
+        product.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        (selectedCategory === "" ||
+          product.category.toLowerCase() === selectedCategory.toLowerCase())
+    );
+  }, [data, searchQuery, selectedCategory]);
+
+  const categories = useMemo(() => {
+    return [...new Set(data.map((product) => product.category.toLowerCase()))];
+  }, [data]);
+
   return (
     <div className="px-4">
       <div className="flex">
-      <SearchBar 
+        <SearchBar 
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
         />
@@ -41,10 +57,12 @@ const Products = ({ addToCart }) => {
             <h1>Loading...</h1>
           </div>
         )}
-        {/* product */}
+        {filteredData.map((product) => (
+          <ProductCard key={product.id} product={product} addToCart={addToCart} />
+        ))}
       </div>
     </div>
   );
 };
 
-export default Products;
+export default React.memo(Products);

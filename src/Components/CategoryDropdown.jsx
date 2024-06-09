@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 const CategoryDropdown = ({ selectedCategory, setSelectedCategory, categories }) => {
-  const handleCategoryChange = ((e) => {
+  const handleCategoryChange = useCallback((e) => {
     setSelectedCategory(e.target.value);
   }, [setSelectedCategory]);
 
@@ -21,4 +21,4 @@ const CategoryDropdown = ({ selectedCategory, setSelectedCategory, categories })
   );
 };
 
-export default CategoryDropdown;
+export default React.memo(CategoryDropdown);
