@@ -25,8 +25,15 @@ const Products = ({ addToCart }) => {
   return (
     <div className="px-4">
       <div className="flex">
-        {/* <SearchBar/> */}
-        {/* <CategoryDropdown/> */}
+      <SearchBar 
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
+        <CategoryDropdown 
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          categories={categories}
+        />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10">
         {loading && (
