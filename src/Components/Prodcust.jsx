@@ -66,3 +66,4 @@ const Products = ({ addToCart }) => {
 };
 
 export default React.memo(Products);
+
