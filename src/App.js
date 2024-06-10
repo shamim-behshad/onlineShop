@@ -20,12 +20,24 @@ function App() {
     });
   }, []);
 
+  const removeFromCart = useCallback((id) => {
+    setCartItems((prevItems) => prevItems.filter(item => item.id !== id));
+  }, []);
+
+  const updateQuantity = useCallback((id, quantity) => {
+    setCartItems((prevItems) => {
+      return prevItems.map(item =>
+        item.id === id ? { ...item, quantity: quantity > 0 ? quantity : 1 } : item
+      );
+    });
+  }, []);
+
   return (
     <Router>
       <Navbar cartCount={cartItems.reduce((count, item) => count + item.quantity, 0)} />
       <Routes>
         <Route path="/" element={<Products addToCart={addToCart} />} />
-        <Route path="/cart" element={<Cart cartItems={cartItems} />} />
+        <Route path="/cart" element={<Cart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity}/>} />
       </Routes>
     </Router>
   );
