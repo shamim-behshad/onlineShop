@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+// Components/Navbar.jsx
+import React, { useState, useCallback } from "react";
+import { Link } from "react-router-dom";
 import logo from "../assets/navbar/logo.png";
 import profilePic from "../assets/navbar/profile.jpg";
 
-const Navbar = () =>{
-    const [showDetails, setShowDetails] = useState(false);
+const Navbar = ({ cartCount }) => {
+  const [showDetails, setShowDetails] = useState(false);
 
-    const toggleDetails = () => {
-      setShowDetails((prevShowDetails) => !prevShowDetails);
-    };
+  const toggleDetails = useCallback(() => {
+    setShowDetails((prevShowDetails) => !prevShowDetails);
+  }, []);
 
-    return(
-      <nav className="bg-gray-800 p-4">
+  return (
+    <nav className="bg-gray-800 p-4">
       <div className="flex items-center justify-between">
-        {/* Left side - Circle picture profile and greeting */}
         <div className="flex items-center relative">
-          <div onClick={toggleDetails}> 
+          <div onClick={toggleDetails}>
             <img
               src={profilePic}
               alt="Profile"
@@ -37,13 +38,14 @@ const Navbar = () =>{
         </div>
 
         <div className="flex items-center">
+          <Link to="/cart" className="text-white mr-4">Cart</Link>
           <div className="bg-red-500 w-8 h-8 rounded-full flex items-center justify-center">
-            <p className="text-white">0</p>
+            <p className="text-white">{cartCount}</p>
           </div>
         </div>
       </div>
     </nav>
-    );
+  );
 };
 
-export default Navbar;
+export default React.memo(Navbar);
