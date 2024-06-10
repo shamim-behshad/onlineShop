@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { useState, useCallback } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
-import Navbar from './Components/Navbar'
+import Navbar from './Components/Navbar';
 import Products from './Components/Prodcust';
+import Cart from './Components/Cart';
 
 function App() {
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = useCallback((product) => {
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find(item => item.id === product.id);
+      if (existingItem) {
+        return prevItems.map(item =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      }
+      return [...prevItems, { ...product, quantity: 1 }];
+    });
+  }, []);
+
   return (
     <Router>
-    <Navbar />
-    <Routes>
-      <Route path="/" element={<Products />} />
-    </Routes>
-  </Router>
+      <Navbar cartCount={cartItems.reduce((count, item) => count + item.quantity, 0)} />
+      <Routes>
+        <Route path="/" element={<Products addToCart={addToCart} />} />
+        <Route path="/cart" element={<Cart cartItems={cartItems} />} />
+      </Routes>
+    </Router>
   );
 }
 

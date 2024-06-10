@@ -1,6 +1,7 @@
-import React from "react";
+// Components/Cart.jsx
+import React, { useMemo } from "react";
 
-const Cart = () => {
+const Cart = ({ cartItems }) => {
 
   return (
     <div className="p-4">
@@ -18,18 +19,20 @@ const Cart = () => {
           </tr>
         </thead>
         <tbody>
-            <tr className="bg-white">
-              <td className="border p-2"></td>
-              <td className="border p-2"></td>
-              <td className="border p-2"></td>
+          {cartItems.map((item, index) => (
+            <tr key={item.id} className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}>
+              <td className="border p-2">{index + 1}</td>
+              <td className="border p-2">{item.title}</td>
+              <td className="border p-2">{item.description}</td>
               <td className="border p-2">
                 <div className="flex items-center justify-center">
                   <button
                     className="bg-red-500 text-white w-5 h-5 flex items-center justify-center rounded-full"
+                    disabled={item.quantity === 1}
                   >
                     -
                   </button>
-                  <span className="mx-2"></span>
+                  <span className="mx-2">{item.quantity}</span>
                   <button
                     className="bg-blue-500 text-white w-5 h-5 flex items-center justify-center rounded-full"
                   >
@@ -37,8 +40,10 @@ const Cart = () => {
                   </button>
                 </div>
               </td>
-              <td className="border p-2">$4</td>
-              <td className="border p-2"></td>
+              <td className="border p-2">${item.price.toFixed(2)}</td>
+              <td className="border p-2">
+                ${(item.price * item.quantity).toFixed(2)}
+              </td>
               <td className="border p-2">
                 <button
                   className="bg-red-500 text-white px-4 py-2 rounded-lg"
@@ -47,6 +52,7 @@ const Cart = () => {
                 </button>
               </td>
             </tr>
+          ))}
         </tbody>
         <tfoot>
           <tr>
@@ -62,4 +68,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default React.memo(Cart);
