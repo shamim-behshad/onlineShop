@@ -24,6 +24,13 @@ function App() {
     setCartItems((prevItems) => prevItems.filter(item => item.id !== id));
   }, []);
 
+  const updateQuantity = useCallback((id, quantity) => {
+    setCartItems((prevItems) => {
+      return prevItems.map(item =>
+        item.id === id ? { ...item, quantity: quantity > 0 ? quantity : 1 } : item
+      );
+    });
+  }, []);
 
   return (
     <Router>
