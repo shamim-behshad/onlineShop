@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 
-const Cart = ({ cartItems, removeFromCart }) => {
+const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
 
   return (
     <div className="p-4">
@@ -26,6 +26,7 @@ const Cart = ({ cartItems, removeFromCart }) => {
               <td className="border p-2">
                 <div className="flex items-center justify-center">
                   <button
+                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
                     className="bg-red-500 text-white w-5 h-5 flex items-center justify-center rounded-full"
                     disabled={item.quantity === 1}
                   >
@@ -33,6 +34,7 @@ const Cart = ({ cartItems, removeFromCart }) => {
                   </button>
                   <span className="mx-2">{item.quantity}</span>
                   <button
+                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
                     className="bg-blue-500 text-white w-5 h-5 flex items-center justify-center rounded-full"
                   >
                     +

@@ -37,7 +37,7 @@ function App() {
       <Navbar cartCount={cartItems.reduce((count, item) => count + item.quantity, 0)} />
       <Routes>
         <Route path="/" element={<Products addToCart={addToCart} />} />
-        <Route path="/cart" element={<Cart cartItems={cartItems} removeFromCart={removeFromCart}/>} />
+        <Route path="/cart" element={<Cart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity}/>} />
       </Routes>
     </Router>
   );
