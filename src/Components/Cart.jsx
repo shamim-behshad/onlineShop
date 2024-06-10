@@ -1,7 +1,6 @@
-// Components/Cart.jsx
 import React, { useMemo } from "react";
 
-const Cart = ({ cartItems }) => {
+const Cart = ({ cartItems, removeFromCart }) => {
 
   return (
     <div className="p-4">
@@ -46,6 +45,7 @@ const Cart = ({ cartItems }) => {
               </td>
               <td className="border p-2">
                 <button
+                  onClick={() => removeFromCart(item.id)}
                   className="bg-red-500 text-white px-4 py-2 rounded-lg"
                 >
                   Delete
