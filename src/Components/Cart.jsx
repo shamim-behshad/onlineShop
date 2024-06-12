@@ -1,4 +1,6 @@
 import React, { useMemo } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
   const getTotalPrice = useMemo(() => {
@@ -16,14 +18,14 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
       <h2 className="text-2xl mb-4">Shopping Cart</h2>
       <table className="w-full border-collapse">
         <thead>
-          <tr className="bg-gray-300 text-gray-700">
-            <th className="border p-2">#</th>
-            <th className="border p-2">Title</th>
-            <th className="border p-2">Description</th>
-            <th className="border p-2">Quantity</th>
-            <th className="border p-2">Price</th>
-            <th className="border p-2">Total Price</th>
-            <th className="border p-2">Actions</th>
+          <tr className="bg-gray-300 text-gray-700 no-border">
+            <th className="p-2"></th>
+            <th className="p-2">Title</th>
+            <th className="p-2 hidden sm:table-cell">Description</th>
+            <th className="p-2">Quantity</th>
+            <th className="p-2">Price</th>
+            <th className="p-2">Total Price</th>
+            <th className="p-2"></th>
           </tr>
         </thead>
         <tbody>
@@ -31,7 +33,7 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
             <tr key={item.id} className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}>
               <td className="border p-2">{index + 1}</td>
               <td className="border p-2">{item.title}</td>
-              <td className="border p-2">{item.description}</td>
+              <td className="border p-2 hidden sm:table-cell">{item.description}</td>
               <td className="border p-2">
                 <div className="flex items-center justify-center">
                   <button
@@ -50,27 +52,30 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
                   </button>
                 </div>
               </td>
-              <td className="border p-2">${item.price.toFixed(2)}</td>
+              <td className="border p-2">{item.price.toFixed(2)}$</td>
               <td className="border p-2">
-                ${(item.price * item.quantity).toFixed(2)}
+                {(item.price * item.quantity).toFixed(2)}$
               </td>
               <td className="border p-2">
                 <button
                   onClick={() => removeFromCart(item.id)}
-                  className="bg-red-500 text-white px-4 py-2 rounded-lg"
+                  className="bg-red-500 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-red-600"
                 >
-                  Delete
+                  <FontAwesomeIcon icon={faTrash} />
                 </button>
               </td>
             </tr>
           ))}
         </tbody>
         <tfoot>
-          <tr>
-            <td colSpan="5" className="text-right p-2">
-              Total:
+          <tr className="border-b border-l">
+            <td colSpan="2" className="text-left p-2 sm:col-span-5 border-b">
+              Total
             </td>
-            <td className="border p-2">${getTotalPrice}</td>
+            <td border-b></td>
+            <td className="border-b"></td>
+            <td className="border-b"></td>
+            <td   className="border p-2">{getTotalPrice}$</td>
             <td className="border p-2"></td>
           </tr>
         </tfoot>
