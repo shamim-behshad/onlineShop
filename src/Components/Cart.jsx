@@ -1,6 +1,15 @@
 import React, { useMemo } from "react";
 
 const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
+  const getTotalPrice = useMemo(() => {
+    return cartItems
+      .reduce((total, item) => total + item.price * item.quantity, 0)
+      .toFixed(2);
+  }, [cartItems]);
+
+  if (cartItems.length === 0) {
+    return <p className="font-bold text-center mt-4">Your cart is empty</p>;
+  }
 
   return (
     <div className="p-4">
@@ -61,7 +70,7 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
             <td colSpan="5" className="text-right p-2">
               Total:
             </td>
-            <td className="border p-2">$5</td>
+            <td className="border p-2">${getTotalPrice}</td>
             <td className="border p-2"></td>
           </tr>
         </tfoot>
