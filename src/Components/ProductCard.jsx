@@ -15,7 +15,7 @@ const ProductCard = ({ product, addToCart }) => {
           <p className="text-gray-700 mt-2">{`Description: ${product.description}`}</p>
         </div>
         <div className="mt-auto flex justify-between">
-          <h6 className="font-bold text-black py-3">{`Price: ${product.price}`}</h6>
+          <h6 className="font-bold text-black py-3">{`Price: ${product.price}`}$</h6>
           <button
             onClick={() => addToCart(product)}
             className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-2"
