@@ -52,9 +52,9 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
                   </button>
                 </div>
               </td>
-              <td className="border p-2">${item.price.toFixed(2)}</td>
+              <td className="border p-2">{item.price.toFixed(2)}$</td>
               <td className="border p-2">
-                ${(item.price * item.quantity).toFixed(2)}
+                {(item.price * item.quantity).toFixed(2)}$
               </td>
               <td className="border p-2">
                 <button
@@ -75,7 +75,7 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
             <td border-b></td>
             <td className="border-b"></td>
             <td className="border-b"></td>
-            <td   className="border p-2">${getTotalPrice}</td>
+            <td   className="border p-2">{getTotalPrice}$</td>
             <td className="border p-2"></td>
           </tr>
         </tfoot>
