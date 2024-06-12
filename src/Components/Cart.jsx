@@ -21,7 +21,7 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
           <tr className="bg-gray-300 text-gray-700 no-border">
             <th className="p-2"></th>
             <th className="p-2">Title</th>
-            <th className="p-2">Description</th>
+            <th className="p-2 hidden sm:table-cell">Description</th>
             <th className="p-2">Quantity</th>
             <th className="p-2">Price</th>
             <th className="p-2">Total Price</th>
@@ -33,7 +33,7 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
             <tr key={item.id} className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}>
               <td className="border p-2">{index + 1}</td>
               <td className="border p-2">{item.title}</td>
-              <td className="border p-2">{item.description}</td>
+              <td className="border p-2 hidden sm:table-cell">{item.description}</td>
               <td className="border p-2">
                 <div className="flex items-center justify-center">
                   <button
@@ -63,14 +63,13 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
                 >
                   <FontAwesomeIcon icon={faTrash} />
                 </button>
-
               </td>
             </tr>
           ))}
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan="5" className="text-right p-2">
+            <td colSpan="4" className="text-right p-2 sm:col-span-5">
               Total:
             </td>
             <td className="border p-2">${getTotalPrice}</td>
