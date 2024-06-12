@@ -1,4 +1,6 @@
 import React, { useMemo } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
   const getTotalPrice = useMemo(() => {
@@ -57,10 +59,11 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
               <td className="border p-2">
                 <button
                   onClick={() => removeFromCart(item.id)}
-                  className="bg-red-500 text-white px-4 py-2 rounded-lg"
+                  className="bg-red-500 text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-red-600"
                 >
-                  Delete
+                  <FontAwesomeIcon icon={faTrash} />
                 </button>
+
               </td>
             </tr>
           ))}
