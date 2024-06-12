@@ -16,14 +16,14 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
       <h2 className="text-2xl mb-4">Shopping Cart</h2>
       <table className="w-full border-collapse">
         <thead>
-          <tr className="bg-gray-300 text-gray-700">
-            <th className="border p-2">#</th>
-            <th className="border p-2">Title</th>
-            <th className="border p-2">Description</th>
-            <th className="border p-2">Quantity</th>
-            <th className="border p-2">Price</th>
-            <th className="border p-2">Total Price</th>
-            <th className="border p-2">Actions</th>
+          <tr className="bg-gray-300 text-gray-700 no-border">
+            <th className="p-2"></th>
+            <th className="p-2">Title</th>
+            <th className="p-2">Description</th>
+            <th className="p-2">Quantity</th>
+            <th className="p-2">Price</th>
+            <th className="p-2">Total Price</th>
+            <th className="p-2"></th>
           </tr>
         </thead>
         <tbody>
