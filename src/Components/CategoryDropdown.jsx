@@ -9,7 +9,7 @@ const CategoryDropdown = ({ selectedCategory, setSelectedCategory, categories })
     <select
       value={selectedCategory}
       onChange={handleCategoryChange}
-      className="bg-white border-b-2 border-gray-300 rounded-none px-4 py-2 ml-4 w-96"
+      className="bg-white border-b-2 border-gray-300 rounded-none px-4 py-2 ml-4 w-96 mb-4 mt-4"
     >
       <option value="">All Categories</option>
       {categories.map((category) => (

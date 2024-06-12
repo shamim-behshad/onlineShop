@@ -1,4 +1,3 @@
-// Components/Navbar.jsx
 import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/navbar/logo.png";
