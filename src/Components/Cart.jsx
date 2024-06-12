@@ -68,11 +68,14 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
           ))}
         </tbody>
         <tfoot>
-          <tr>
-            <td colSpan="4" className="text-right p-2 sm:col-span-5">
-              Total:
+          <tr className="border-b border-l">
+            <td colSpan="2" className="text-left p-2 sm:col-span-5 border-b">
+              Total
             </td>
-            <td className="border p-2">${getTotalPrice}</td>
+            <td border-b></td>
+            <td className="border-b"></td>
+            <td className="border-b"></td>
+            <td   className="border p-2">${getTotalPrice}</td>
             <td className="border p-2"></td>
           </tr>
         </tfoot>
