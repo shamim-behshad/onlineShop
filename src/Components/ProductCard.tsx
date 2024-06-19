@@ -1,6 +1,12 @@
 import React from "react";
+import { Product } from "./Prodcust"; // Corrected import statement
 
-const ProductCard = ({ product, addToCart }) => {
+interface ProductCardProps {
+  product: Product;
+  addToCart: (product: Product) => void;
+}
+
+const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart }) => {
   return (
     <div className="border border-gray-300 rounded-lg p-3 relative">
       <div className="flex flex-col h-full">

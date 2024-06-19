@@ -4,11 +4,25 @@ import ProductCard from "./ProductCard";
 import SearchBar from "./SearchBar";
 import CategoryDropdown from "./CategoryDropdown";
 
-const Products = ({ addToCart }) => {
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
+export interface Product {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+  price: number;
+}
+
+
+interface ProductsProps {
+  addToCart: (product: Product) => void;
+}
+
+const Products: React.FC<ProductsProps> = ({ addToCart }) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [data, setData] = useState<Product[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
 
   useEffect(() => {
     setLoading(true);
@@ -34,17 +48,21 @@ const Products = ({ addToCart }) => {
   }, [data, searchQuery, selectedCategory]);
 
   const categories = useMemo(() => {
-    return [...new Set(data.map((product) => product.category.toLowerCase()))];
+    const uniqueCategories = data
+      .map((product) => product.category.toLowerCase())
+      .filter((value, index, self) => self.indexOf(value) === index);
+    return uniqueCategories;
   }, [data]);
-
+  
+  
   return (
     <div className="px-4">
       <div className="flex">
-        <SearchBar 
+        <SearchBar
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
         />
-        <CategoryDropdown 
+        <CategoryDropdown
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
           categories={categories}
@@ -65,4 +83,3 @@ const Products = ({ addToCart }) => {
 };
 
 export default React.memo(Products);
-

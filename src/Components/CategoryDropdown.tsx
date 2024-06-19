@@ -1,9 +1,22 @@
 import React, { useCallback } from "react";
 
-const CategoryDropdown = ({ selectedCategory, setSelectedCategory, categories }) => {
-  const handleCategoryChange = useCallback((e) => {
-    setSelectedCategory(e.target.value);
-  }, [setSelectedCategory]);
+interface CategoryDropdownProps {
+  selectedCategory: string;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+  categories: string[];
+}
+
+const CategoryDropdown: React.FC<CategoryDropdownProps> = ({
+  selectedCategory,
+  setSelectedCategory,
+  categories,
+}) => {
+  const handleCategoryChange = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setSelectedCategory(e.target.value);
+    },
+    [setSelectedCategory]
+  );
 
   return (
     <select

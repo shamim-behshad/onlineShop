@@ -2,13 +2,21 @@ import React, { useState, useCallback } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
 import Navbar from './Components/Navbar';
-import Products from './Components/Prodcust';
-import Cart from './Components/Cart';
+import Products, { Product } from './Components/Prodcust'; // Importing Product interface
+import Cart from './Components/Cart'; // Importing Cart component
+
+interface CartItem {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  quantity: number;
+}
 
 function App() {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  const addToCart = useCallback((product) => {
+  const addToCart = useCallback((product: Product) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find(item => item.id === product.id);
       if (existingItem) {
@@ -20,11 +28,11 @@ function App() {
     });
   }, []);
 
-  const removeFromCart = useCallback((id) => {
+  const removeFromCart = useCallback((id: number) => {
     setCartItems((prevItems) => prevItems.filter(item => item.id !== id));
   }, []);
 
-  const updateQuantity = useCallback((id, quantity) => {
+  const updateQuantity = useCallback((id: number, quantity: number) => {
     setCartItems((prevItems) => {
       return prevItems.map(item =>
         item.id === id ? { ...item, quantity: quantity > 0 ? quantity : 1 } : item
