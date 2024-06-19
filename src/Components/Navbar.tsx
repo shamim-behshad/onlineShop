@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import logo from "../assets/navbar/logo.png";
 import profilePic from "../assets/navbar/profile.jpg";
 
-const Navbar = ({ cartCount }) => {
-  const [showDetails, setShowDetails] = useState(false);
+interface NavbarProps {
+  cartCount: number;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ cartCount }) => {
+  const [showDetails, setShowDetails] = useState<boolean>(false);
 
   const toggleDetails = useCallback(() => {
     setShowDetails((prevShowDetails) => !prevShowDetails);

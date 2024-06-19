@@ -2,7 +2,21 @@ import React, { useMemo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
+interface CartItem {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  quantity: number;
+}
+
+interface CartProps {
+  cartItems: CartItem[];
+  removeFromCart: (id: number) => void;
+  updateQuantity: (id: number, quantity: number) => void;
+}
+
+const Cart: React.FC<CartProps> = ({ cartItems, removeFromCart, updateQuantity }) => {
   const getTotalPrice = useMemo(() => {
     return cartItems
       .reduce((total, item) => total + item.price * item.quantity, 0)
@@ -21,7 +35,7 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
           <tr className="bg-gray-300 text-gray-700 no-border">
             <th className="p-2"></th>
             <th className="p-2">Title</th>
-            <th className="p-2 hidden sm:table-cell">Description</th>
+            <th className="p-2">Description</th>
             <th className="p-2">Quantity</th>
             <th className="p-2">Price</th>
             <th className="p-2">Total Price</th>
@@ -33,7 +47,7 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
             <tr key={item.id} className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}>
               <td className="border p-2">{index + 1}</td>
               <td className="border p-2">{item.title}</td>
-              <td className="border p-2 hidden sm:table-cell">{item.description}</td>
+              <td className="border p-2">{item.description}</td>
               <td className="border p-2">
                 <div className="flex items-center justify-center">
                   <button
@@ -69,13 +83,10 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
         </tbody>
         <tfoot>
           <tr className="border-b border-l">
-            <td colSpan="2" className="text-left p-2 sm:col-span-5 border-b">
+            <td colSpan={5} className="text-left p-2 border-b">
               Total
             </td>
-            <td border-b></td>
-            <td className="border-b"></td>
-            <td className="border-b"></td>
-            <td   className="border p-2">{getTotalPrice}$</td>
+            <td className="border p-2">{getTotalPrice}$</td>
             <td className="border p-2"></td>
           </tr>
         </tfoot>
